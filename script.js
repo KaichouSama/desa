@@ -140,3 +140,78 @@ dropdown.addEventListener("click", function(){
     }
 
 });
+
+// Animasi Visi Misi
+
+const vmCards = document.querySelectorAll(".vm-card");
+
+const vmObserver = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},{
+    threshold:0.2
+});
+
+vmCards.forEach(card=>{
+
+    vmObserver.observe(card);
+
+});
+
+// Animasi Letak Geografis
+
+const geografi = document.querySelector(".geografi-text");
+
+const geoObserver = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},{
+    threshold:0.2
+});
+
+geoObserver.observe(geografi);
+
+
+// Animasi Kepala Desa
+
+const kepalaElements = document.querySelectorAll(".kepala-image, .kepala-info");
+
+const kepalaObserver = new IntersectionObserver((entries)=>{
+
+    entries.forEach(entry=>{
+
+        if(entry.isIntersecting){
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+},{
+    threshold:0.2
+});
+
+kepalaElements.forEach(item=>{
+
+    kepalaObserver.observe(item);
+
+});
