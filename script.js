@@ -95,123 +95,243 @@ newsCards.forEach((card, index) => {
 
 const year = new Date().getFullYear();
 
-document.querySelector(
-".footer-bottom p"
-).innerHTML =
-`© ${year} Desa Cibodas. All Rights Reserved.`;
+document.querySelector(".footer-bottom p").innerHTML =
+  `© ${year} Desa Cibodas. All Rights Reserved.`;
 
 // Menu Mobile
 
 const menuToggle = document.querySelector(".menu-toggle");
 const navMenu = document.querySelector(".nav-menu");
 
-menuToggle.addEventListener("click",()=>{
-
-    navMenu.classList.toggle("active");
-
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("active");
 });
 
 // Navbar berubah saat scroll
 
 const header = document.querySelector(".header");
 
-window.addEventListener("scroll",()=>{
-
-    if(window.scrollY > 50){
-
-        header.classList.add("scrolled");
-
-    }else{
-
-        header.classList.remove("scrolled");
-
-    }
-
+window.addEventListener("scroll", () => {
+  if (window.scrollY > 50) {
+    header.classList.add("scrolled");
+  } else {
+    header.classList.remove("scrolled");
+  }
 });
 
 const dropdown = document.querySelector(".dropdown");
 
-dropdown.addEventListener("click", function(){
-
-    if(window.innerWidth <= 900){
-
-        this.classList.toggle("active");
-
-    }
-
+dropdown.addEventListener("click", function () {
+  if (window.innerWidth <= 900) {
+    this.classList.toggle("active");
+  }
 });
 
 // Animasi Visi Misi
 
 const vmCards = document.querySelectorAll(".vm-card");
 
-const vmObserver = new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.classList.add("show");
-
-        }
-
+const vmObserver = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("show");
+      }
     });
+  },
+  {
+    threshold: 0.2,
+  },
+);
 
-},{
-    threshold:0.2
-});
-
-vmCards.forEach(card=>{
-
-    vmObserver.observe(card);
-
+vmCards.forEach((card) => {
+  vmObserver.observe(card);
 });
 
 // Animasi Letak Geografis
 
 const geografi = document.querySelector(".geografi-text");
 
-const geoObserver = new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.classList.add("show");
-
+if (geografi) {
+  const geoObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
         }
+      });
+    },
+    {
+      threshold: 0.2,
+    },
+  );
 
-    });
-
-},{
-    threshold:0.2
-});
-
-geoObserver.observe(geografi);
-
+  geoObserver.observe(geografi);
+}
 
 // Animasi Kepala Desa
 
 const kepalaElements = document.querySelectorAll(".kepala-image, .kepala-info");
 
-const kepalaObserver = new IntersectionObserver((entries)=>{
-
-    entries.forEach(entry=>{
-
-        if(entry.isIntersecting){
-
-            entry.target.classList.add("show");
-
+if (kepalaElements.length > 0) {
+  const kepalaObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
         }
+      });
+    },
+    {
+      threshold: 0.2,
+    },
+  );
+
+  kepalaElements.forEach((item) => {
+    kepalaObserver.observe(item);
+  });
+}
+
+// Animasi Struktur Organisasi
+
+const strukturImage = document.querySelector(".struktur-image");
+
+if (strukturImage) {
+  const strukturObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+    },
+  );
+
+  strukturObserver.observe(strukturImage);
+}
+
+// Animasi Daftar Perangkat Desa
+
+const perangkatCards = document.querySelectorAll(".perangkat-card");
+
+if (perangkatCards.length > 0) {
+  const perangkatObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+
+          perangkatObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+    },
+  );
+
+  perangkatCards.forEach((card, index) => {
+    card.style.transition = `all .8s ease ${index * 0.15}s`;
+
+    perangkatObserver.observe(card);
+  });
+}
+
+// Animasi Berita Desa
+const beritaCards = document.querySelectorAll(".berita-card");
+
+if (beritaCards.length > 0) {
+  const beritaObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("show");
+
+          beritaObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      threshold: 0.2,
+    },
+  );
+
+  beritaCards.forEach((card) => {
+    beritaObserver.observe(card);
+  });
+}
+
+// ==========================
+// Animasi Galeri
+// ==========================
+
+const galeriItems = document.querySelectorAll(".galeri-item");
+
+if(galeriItems.length > 0){
+
+    const galeriObserver = new IntersectionObserver((entries)=>{
+
+        entries.forEach(entry=>{
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add("show");
+
+                galeriObserver.unobserve(entry.target);
+
+            }
+
+        });
+
+    },{
+
+        threshold:0.2
 
     });
 
-},{
-    threshold:0.2
-});
+    galeriItems.forEach((item,index)=>{
 
-kepalaElements.forEach(item=>{
+        item.style.transition = `all .8s ease ${index*0.15}s`;
 
-    kepalaObserver.observe(item);
+        galeriObserver.observe(item);
 
-});
+    });
+
+}
+
+// ==========================
+// Animasi Kontak
+// ==========================
+
+const contactElements = document.querySelectorAll(".contact-info, .contact-map");
+
+if(contactElements.length > 0){
+
+    const contactObserver = new IntersectionObserver((entries)=>{
+
+        entries.forEach(entry=>{
+
+            if(entry.isIntersecting){
+
+                entry.target.classList.add("show");
+
+                contactObserver.unobserve(entry.target);
+
+            }
+
+        });
+
+    },{
+        threshold:0.2
+    });
+
+    contactElements.forEach(item=>{
+
+        contactObserver.observe(item);
+
+    });
+
+}
